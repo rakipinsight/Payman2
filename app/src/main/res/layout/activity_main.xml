@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/collection_amt_lyt"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="140dp">
+
+        <TextView
+            android:id="@+id/collection_amt_textbox"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" Collection Amount "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/black" />
+
+        <ImageButton
+            android:id="@+id/collection_amt_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus" />
+
+        <EditText
+            android:id="@+id/collection_amt_editText"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="100.0"
+            android:textSize="18sp"
+            android:inputType="numberDecimal" />
+
+        <ImageButton
+            android:id="@+id/collection_amt_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/minus" />
+        <TextView
+            android:id="@+id/collection_amt_textboxend"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="  "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/agent_percent_lyt"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_below="@+id/collection_amt_lyt">
+        >
+
+        <TextView
+            android:id="@+id/agent_percent_textbox"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" Agent Percentage "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/black" />
+
+        <ImageButton
+            android:id="@+id/agent_percent_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus" />
+
+        <EditText
+            android:id="@+id/agent_percent_editText"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="1.0"
+            android:textSize="18sp"
+            android:inputType="numberDecimal" />
+
+        <ImageButton
+            android:id="@+id/agent_percent_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/minus" />
+        <TextView
+            android:id="@+id/agent_percent_textboxend"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="  "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/agent_amt_lyt"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_below="@+id/agent_percent_lyt">
+
+        <TextView
+            android:id="@+id/agent_amt_textbox"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" Agent Amount "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/agent_amt_TextView"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="0.0"
+            android:textSize="18sp"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/agent_amt_textboxend"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="  "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_type_lyt"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_below="@+id/agent_amt_lyt">
+
+        <TextView
+            android:id="@+id/payment_type_textbox"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" Payment Type "
+            android:adjustViewBounds="true"
+            android:textColor="@android:color/black" />
+
+        <Spinner
+            android:id="@+id/payment_dynamic_spinner"
+            android:hint=" Choose Payment Type "
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/currency_type_lyt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_below="@+id/payment_type_lyt">
+
+            <TextView
+                android:id="@+id/currency_type_textbox"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:text=" Currency "
+                android:adjustViewBounds="true"
+                android:textColor="@android:color/black" />
+
+            <Spinner
+                android:id="@+id/currency_dynamic_spinner"
+                android:hint=" Choose Currency "
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+</android.support.constraint.ConstraintLayout>
