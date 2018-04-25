@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--mata data for place api-->
+        <!--https://console.developers.google.com/apis-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/app_id" />
     </application>
 
 </manifest>
