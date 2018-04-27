@@ -12,29 +12,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.ronin.hirayama.model.Payment;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements OnConnectionFailedListener{
+public class MainActivity extends AppCompatActivity{
 
     private TextView mTextMessage;
 
@@ -53,9 +53,14 @@ public class MainActivity extends AppCompatActivity implements OnConnectionFaile
     Calendar myCalendar = Calendar.getInstance();
     EditText time;
 
-    private GoogleApiClient mGoogleApiClient;
-    private final int PLACE_PICKER_REQUEST = 1;
-    private String TAG = "place";
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mPaymentsDatabaseReference;
+    private ChildEventListener mChildEventListener;
+
+    private Button updateButton;
+
+    private ListView mMessageListView;
+//    private MessageAdapter mMessageAdapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -116,26 +121,6 @@ public class MainActivity extends AppCompatActivity implements OnConnectionFaile
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        //____________check for successfull result
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-
-                //_________case for placepicker
-                case PLACE_PICKER_REQUEST:
-
-                    //______create place object from the received intent.
-                    Place place = PlacePicker.getPlace(data, this);
-
-                    //______get place name from place object
-                    String toastMsg = String.format("Place: %s", place.getName());
-
-                    //_________show toast message for selected place
-                    Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-
-                    break;
-            }
-        }
     }
 
     @Override
@@ -147,15 +132,98 @@ public class MainActivity extends AppCompatActivity implements OnConnectionFaile
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        // Google Maps API
+//        mMessageListView = (ListView) findViewById(R.id.messageListView);
+//        // Initialize message ListView and its adapter
+//        List<FriendlyMessage> friendlyMessages = new ArrayList<>();
+//        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
+//        mMessageListView.setAdapter(mMessageAdapter);
 
-        //________initialize google client api
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(this, this)
-                .build();
+        /* Firebase Code */
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mPaymentsDatabaseReference = mFirebaseDatabase.getReference().child("flamelink/environments/production/content/schemaDemo/en-US");
+
+        // Update Button Logic
+        updateButton = (Button) findViewById(R.id.update_button);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: Send messages on click
+                BigInteger bigInteger = new BigInteger("1524240866140");
+                Payment payment = new Payment("Payment 2 Kansas", 40000, 10, 4000,
+                        "Cash", "Rupee", "26th April 2018", "12:30", "1524240866140", "Kansas", "Collected");
+//                payment.setTitle("Payment 2 Kansas");
+//                payment.setCollection_amount(40000);
+//                payment.setAgent_percentage(10);
+//                payment.setAgent_amount(4000);
+//                payment.setPaymentType("Cash");
+//                payment.setCurrency("Rupee");
+//                payment.setDate("26th April 2018");
+//                payment.setTime("12:30");
+//
+//                payment.setId(bigInteger);
+//                payment.setLocation("Kansas");
+//                payment.setStatus("Collected");
+
+                mPaymentsDatabaseReference.push().setValue(payment);
+
+//                HashMap<String, Object> result = new HashMap<>();
+//                result.put("title", "Payment 2 Kansas");
+//                result.put("collectionAmount", 40000);
+//
+//
+//                mPaymentsDatabaseReference.child("1524240866140").updateChildren(result);
+            }
+        });
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //Payment payment = dataSnapshot.getValue(Payment.class);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        mPaymentsDatabaseReference.addChildEventListener(mChildEventListener);
+
+//        updateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // TODO: Update payments on click
+//                Payment payment = new Payment();
+//                payment.setTitle("Collect From Kansas");
+//                payment.setCollection_amount(40000);
+//                payment.setAgent_percentage(10);
+//                payment.setAgent_amount(4000);
+//                payment.setPaymentType("Cash");
+//                payment.setCurrency("Rupee");
+//                payment.setDate("April 26, 2018");
+//                payment.setTime("11:50");
+////                payment.setId(1524240866140);
+//
+//
+//        })
 
 
 
@@ -353,24 +421,4 @@ public class MainActivity extends AppCompatActivity implements OnConnectionFaile
 
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "Connection failed", Toast.LENGTH_SHORT).show();
-    }
-
-    public void openPlacePicker(View view) {
-
-        //___________create object of placepicker builder
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        try {
-
-            //__________start placepicker activity for result
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-    }
 }
