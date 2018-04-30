@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
     private Button updateButton;
 
     private ListView mMessageListView;
-//    private MessageAdapter mMessageAdapter;
+    private MessageAdapter mMessageAdapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity{
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //Payment payment = dataSnapshot.getValue(Payment.class);
-
+                Payment payment = dataSnapshot.getValue(Payment.class);
+                mMessageAdapter.add(payment);
             }
 
             @Override

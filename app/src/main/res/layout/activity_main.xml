@@ -459,7 +459,41 @@
                 android:text="Update" />
 
         </LinearLayout>
-ß
+
+        <LinearLayout
+            android:id="@+id/listView_lyt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_below="@+id/update_btn_lyt">
+
+            <TextView
+                android:id="@+id/list_textbox"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:text=" List "
+                android:adjustViewBounds="true"
+                android:textColor="@android:color/black" />
+
+            <ListView
+                android:id="@+id/messageListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/linearLayout"
+                android:stackFromBottom="true"
+                android:divider="@android:color/transparent"
+                android:transcriptMode="alwaysScroll"
+                tools:listitem="@layout/item_message"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.BottomNavigationView
